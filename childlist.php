@@ -90,7 +90,7 @@
             <!-- Main Content -->
             <?php
             include 'db.php';
-            $q = "SELECT * from `vaccine`;";
+            $q = "SELECT * from `child`;";
             $res = mysqli_query($con, $q);
             if (!$res) {
                 echo "something gone wrong";
@@ -115,8 +115,13 @@
                                                 <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
                                                     <thead>
                                                         <tr>
-                                                            <th>vaccine Name</th>
-                                                            <th>Vaccine status</th>
+                                                            <th>Child Name</th>
+                                                            <th>Father name</th>
+                                                            <th>Age</th>
+                                                            <th>Date of Birth</th>
+                                                            <th>Phone No</th>
+                                                            <th>Gender</th>
+                                                            
                                                             <th>Action</th>
 
                                                         </tr>
@@ -124,11 +129,15 @@
                                                     <tbody>
                                                         <?php while ($row = mysqli_fetch_assoc($res)) { ?>
                                                             <tr>
-                                                                <td cl  ass="col-md-3"><?= $row['v_name'] ?> </td>
-                                                                <td class="col-md-3"><?= $row['v_status'] ?></td>
+                                                                <td><?= $row['c_name'] ?> </td>
+                                                                <td><?= $row['c_father'] ?></td>
+                                                                <td><?= $row['c_age'] ?></td>
+                                                                <td><?= $row['c_dob'] ?></td>
+                                                                <td><?= $row['c_number'] ?></td>
+                                                                <td><?= $row['c_gender'] ?></td>
                                                                 <td>
-                                                                    <a class="btn btn-sm btn-warning mr-1" href="/vaccine/editvaccine.php?id=<?= $row['v_id'] ?>"> Edit</a>
-                                                                    <a class="btn btn-sm btn-danger" href="/vaccine/deletevaccine.php?id=<?= $row['v_id'] ?>"> Delete</a>
+                                                                    <a class="btn btn-sm btn-warning mr-1" href="/vaccine/editchild.php?id=<?= $row['c_id'] ?>"> Edit</a>
+                                                                    <a class="btn btn-sm btn-danger" href="/vaccine/deletechild.php?id=<?= $row['c_id'] ?>"> Delete</a>
                                                                 </td>   
 
                                                             </tr>

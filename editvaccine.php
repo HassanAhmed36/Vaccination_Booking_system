@@ -51,17 +51,17 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
+            <a href="index.php"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
                 class="logo-name">Otika</span>
             </a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
             <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>View website</span></a>
+              <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View website</span></a>
             </li>
             <li class="dropdown">
-              <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>View child</span></a>
+              <a href="childlist.php" class="nav-link"><i data-feather="monitor"></i><span>child list</span></a>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
@@ -95,16 +95,16 @@
 
         $id = $_GET['id'];
 
-        $q = "SELECT * FROM `vaccine` where `h_id` = $id";
+        $q = "SELECT * FROM `vaccine` where `v_id` = $id";
         $res = mysqli_query($con, $q);
         $row = mysqli_fetch_assoc($res);
 
-              if($_SERVER["REQUEST_METHOD"] == "POST") {
+             if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $id = $_GET['id'];
             $name = @$_POST['v_name'];
             $status = @$_POST['v_status'];
-            $qu = "UPDATE `vaccine` set `v_id`=$id, `v_name`= '$name', `v_status` = '$status' WHERE `vaccine`.`h_id` = $id";
+            $qu = "UPDATE `vaccine` set `v_id`=$id, `v_name`= '$name', `v_status` = '$status' WHERE `vaccine`.`v_id` = $id";
             $result = mysqli_query($con, $qu);
             if ($result) {
 
@@ -134,13 +134,13 @@
                 <form method="POST" action="">
                 <div class="form-group">
                     <label for="email">Vaccine Name</label>
-                    <input type="text" class="form-control" name="v_name" value="<?= $row['h_name'] ?>">
+                    <input type="text" class="form-control" name="v_name" value="<?= $row['v_name'] ?>">
                     <div class="invalid-feedback">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email">Vaccine Status</label>
-                    <input id="" type="number" class="form-control" name="v_status" value="<?= $row['h_address'] ?>">
+                    <input id="" type="number" class="form-control" name="v_status" value="<?= $row['v_status'] ?>">
                     <div class="invalid-feedback">
                     </div>
                   </div>

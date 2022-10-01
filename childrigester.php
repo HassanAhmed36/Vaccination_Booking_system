@@ -1,3 +1,28 @@
+<?php
+      include 'db.php';
+      if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = $_POST['c_name'];
+        $father = $_POST['c_father'];
+        $age = $_POST['c_age'];
+        $dob = $_POST['c_dob'];
+        $gender = $_POST['c_gender'];
+        $number = $_POST['c_number'];
+
+        $q = "INSERT INTO `child` VALUES (NULL, '$name', '$father', '$age', '$dob', '$gender', '$number');";
+        $res = mysqli_query($con , $q);
+        if ($res) {
+          header("location: childlist.php");
+          die;
+        }else {
+          echo mysqli_error($con);
+        }
+
+      }
+
+
+      ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,19 +67,19 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <!-- <h1 class="logo"><a href="index.html"><b>Onepage</b></a></h1> -->
+      <!-- <h1 class="logo"><a href="index.php"><b>Onepage</b></a></h1> -->
       <!-- Uncomment below if you prefer to use an image logo -->
-      <a href="index.html" class="logo"><img src="user-assets/img/logo.png" alt="" class="img-fluid"></a>
+      <a href="index.php" class="logo"><img src="user-assets/img/logo.png" alt="" class="img-fluid"></a>
       
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/vaccine/index.html">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/vaccine/index.php">Home</a></li>
           <li><a class="nav-link scrollto" href="/vaccine/about.html">About</a></li>
           
           
           <li><a class="nav-link scrollto" href="/vaccine/contact.html">Contact</a></li>
           <li><a class="nav-link scrollto" href="/vaccine/childrigester.php">Rigester child</a></li>
-          <li><a class="nav-link scrollto" href="/vaccine/Dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="/vaccine/dashboard.php">Dashboard</a></li>
           <li><a class="getstarted scrollto" href="/vaccine/login.php">Login</a></li>
           <li><a class="getstarted scrollto" href="/vaccine/Register.php">Rigester</a></li>
         </ul>
@@ -70,30 +95,32 @@
   <h2 class="my-5 text-center" style="color: #124265; font-weight:900;">Child Rigestration form</h2>
 
   <form action="user-forms/contact.php" method="post" role="form" class="php-email-form">
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Child Name" required>
-              </div>
-              <div class="col-md-6 form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Parent Name" required>
-              </div>
-            </div>
-            <div class="row my-3`">
-              <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Child Name" required>
-              </div>
-              <div class="col-md-6 form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Parent Name" required>
-              </div>
+  <div class="form-group mt-3">
+              <input type="text" class="form-control" name="c_name" id="subject" placeholder="Child Name" required>
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              <input type="text" class="form-control" name="c_father" id="subject" placeholder="Parent Name" required>
             </div>
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            <div class="row my-3">
+              <div class="col-md-6 form-group">
+                <input type="number" name="v_age" class="form-control" id="name" placeholder="Age" required>
+              </div>
+              <div class="col-md-6 form-group">
+                <input type="number" class="form-control" name="c_number" id="email" placeholder="Phone number" required>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-6 form-group">
+                <input type="text" name="c_dob" class="form-control" id="name" placeholder="Date of Birth" required>
+              </div>
+              <div class="col-md-6 form-group">
+                <input type="text" class="form-control" name="c_gender" id="email" placeholder="Gender" required>
+              </div>
             </div>
             
-            <div class="my-3"><button type="submit" class=" btn btn-primary ">Send Message</button></div>
+           
+            
+            <div class="my-3"><button type="submit" class=" btn btn-primary ">Rigester child</button></div>
 
   </div>
   <!-- ======= Footer ======= -->

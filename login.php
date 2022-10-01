@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
 
-    header('location: index.html');
+    header('location: index.php');
   } else {
     
     $err = true;
