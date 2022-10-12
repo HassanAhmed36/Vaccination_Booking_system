@@ -1,3 +1,9 @@
+<?php
+ session_start();
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,6 +87,7 @@
                             </ul>
                         </li>
 
+                        <li><a class="nav-link" href="booking.php">Booking details</a></li>
 
 
 
@@ -121,8 +128,17 @@
                                                             <th>Date of Birth</th>
                                                             <th>Phone No</th>
                                                             <th>Gender</th>
+
+                                                            <?php
+                                                            if(!$_SESSION['role'] == 1){
+                                                            ?>
                                                             
-                                                            <th>Action</th>
+                                                            <th>Action</th>;
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                            
+                                                            
 
                                                         </tr>
                                                     </thead>
@@ -136,9 +152,25 @@
                                                                 <td><?= $row['c_number'] ?></td>
                                                                 <td><?= $row['c_gender'] ?></td>
                                                                 <td>
-                                                                    <a class="btn btn-sm btn-warning mr-1" href="/vaccine/editchild.php?id=<?= $row['c_id'] ?>"> Edit</a>
-                                                                    <a class="btn btn-sm btn-danger" href="/vaccine/deletechild.php?id=<?= $row['c_id'] ?>"> Delete</a>
-                                                                </td>   
+                                                                <?php
+                                                            if(!$_SESSION['role'] == 1){
+                                                                echo' <a class="btn btn-sm btn-warning mr-1" href="/vaccine/editchild.php?id=<?= $row["c_id"] ?>"> Edit</a>
+                                                            <a class="btn btn-sm btn-danger" href="/vaccine/deletechild.php?id=<?= $row["c_id"] ?>"> Delete</a>;';
+                                                            }
+                                                            ?>
+                                                             </td>
+
+                                                             
+
+                                                            
+                                                           
+                                                            
+                                                            
+                                                          
+                                                            
+                                                               
+                                                                    
+                                                                  
 
                                                             </tr>
                                                         <?php } ?>

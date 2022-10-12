@@ -81,6 +81,7 @@
                             </ul>
                         </li>
 
+                        <li><a class="nav-link" href="booking.php">Booking details</a></li>
 
 
 

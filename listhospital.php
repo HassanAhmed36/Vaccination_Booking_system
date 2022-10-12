@@ -80,6 +80,8 @@
                 <li><a class="nav-link" href="listvaccine.php">Vaccine list</a></li>
               </ul>
             </li>
+            <li><a class="nav-link" href="booking.php">Booking details</a></li>
+
             
            
             
@@ -128,7 +130,10 @@ include 'db.php';
                             <td><?= $row['h_name']?> </td>
                             <td><?= $row['h_address']?></td>
                             <td><?= $row['h_password']?></td>
-                            <td><a class="btn btn-sm btn-warning mr-1" href="/vaccine/edithospital.php?id=<?= $row['h_id']?>" >Edit</a><a class="btn btn-sm btn-danger" href="/vaccine/deletehospital.php?id=<?= $row['h_id']?>" >Delete</a></td>
+                            <td>
+                            <a class="btn btn-sm btn-warning mr-1" href="/vaccine/edithospital.php?id=<?= $row["h_id"] ?>"> Edit</a>
+                            <a class="btn btn-sm btn-danger" href="/vaccine/deletehospital.php?id=<?= $row["h_id"] ?>"> Delete</a>
+                            </td>
                             
                           </tr>
                           <?php } ?>

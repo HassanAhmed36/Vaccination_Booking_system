@@ -84,6 +84,8 @@
                                 <li><a class="nav-link" href="listvaccine.php">vaccine list</a></li>
                             </ul>
                         </li>
+                        <li><a class="nav-link" href="booking.php">Booking details</a></li>
+
 
 
 

@@ -5,10 +5,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
   
-  $name = @$_POST["name"];
-  $password = @$_POST["password"];
+  $name = @$_POST["h_name"];
+  $password = @$_POST["h_password"];
   
-  $q = "SELECT * FROM `user` Where name ='$name' AND password='$password';";
+  $q = "SELECT * FROM `hospital` Where h_name ='$name' AND h_password='$password';";
   $res = mysqli_query($con, $q);
   $num = mysqli_num_rows($res);
     
@@ -18,17 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     session_start();
     
     $_SESSION['loggedin'] = true;
-    $_SESSION['name'] = $name;
-    $q = "SELECT * FROM `user` where name = '$name'";
-    $result = mysqli_query($con, $q);
-    $row = mysqli_fetch_assoc($result);
-    $_SESSION['role'] = $row['role'];
+    $_SESSION['h_name'] = $name;
+   
     
-    if (@$_SESSION['role'] == 1) {
-       header("location: dashboard.php");
-    }else{
-        header("location: index.php");
-    }
+    if (@$_SESSION['h_name']) {
+       header("location: index.php");
+        }
 
   
 
@@ -73,14 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Login</h4>
+                                <h4>Hospital Login</h4>
                             </div>
                             <div class="card-body">
                                 <form method="POST" action="#" class="needs-validation" novalidate="">
                                     <div class="form-group mt-3 ">
-                                        <input type="text" class="form-control my-4" name="name" id="subject"
+                                        <input type="text" class="form-control my-4" name="h_name" id="subject"
                                             placeholder="Email" required>
-                                        <input type="password" class="form-control my-4" name="password" id="subject"
+                                        <input type="password" class="form-control my-4" name="h_password" id="subject"
                                         placeholder="Password" required>
                                     </div>
 
@@ -100,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="mt-2 text-muted text-center">
-                    Don't have an account? <a href="Register.php">Create One</a>
+                    Don't have an account? <a href="hospitalRegister.php">Create One</a>
                 </div>
             </div>
     </div>

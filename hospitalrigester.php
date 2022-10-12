@@ -1,27 +1,23 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      include 'db.php';
+      if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = $_POST['h_name'];
+        $address = $_POST['h_address'];
+        $password = $_POST['h_password'];
 
-    include 'db.php';
-    
-
-        $name = @$_POST["name"];
-        $email = @$_POST["email"];
-        $password = @$_POST["password"];
-        $role = @$_POST["role"];
-        $q = "INSERT INTO `user`  VALUES (null, '$name', '$email', '$password', $role);";
-        $res = mysqli_query($con, $q);
+        $q = "INSERT into `hospital` values(null , '$name','$address','$password')";
+        $res = mysqli_query($con , $q);
         if ($res) {
-           header('location: login.php');
-            
-        }else{
-            echo mysqli_connect_error($con);
-            
+          header("location: hospitallogin.php");
+          die;
+        }else {
+          echo mysqli_error($con);
         }
 
-    }; 
+      }
 
 
-?>
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,25 +50,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="card card-primary">
                             
                               <div class="card-body">
-                              <h3 class="mx-2 ">User Register</h3>
-                                <form method="POST">
+                              <h3 class="mx-2 ">Hospital Register</h3>
+                                <form method="POST" action="">
                                     <div class="form-group mt-3 ">
-                                        <input type="text" class="form-control my-4" name="Name" id="subject"
-                                            placeholder="Name" required>
-                                        <input type="email" class="form-control my-4" name="password" id="subject"
-                                            placeholder="Email" required>
+                                        <input type="text" class="form-control my-4" name="h_Name" id=""
+                                            placeholder="Hospital Name" required>
+                                        <input type="text" class="form-control my-4" name="h_address" id=""
+                                            placeholder="Hospital Address" required>
 
-                                        <input type="password" class="form-control my-4" name="password" id="subject"
+                                        <input type="password" class="form-control my-4" name="h_password" id=""
                                             placeholder="Password" required>
 
-                                        <input type="text" class="form-control my-4" name="password" id="subject"
-                                            placeholder="Role" required>
+                                       
                                             <div class="my-3"><button type="submit" class=" btn btn-primary ">Rigester</button></div>
 
 
                                     </div>
                                     <div class="mb-4 text-muted text-center">
-                                        Already Registered? <a href="login.php">Login</a>
+                                        Already Registered? <a href="login.php">Login hospital</a>
                                     </div>
                             </div>
                         </div>
