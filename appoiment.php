@@ -148,7 +148,7 @@ include 'db.php';
                             
                             <th>Date</th>
                             <?php
-                            if(@$_SESSION['role'] == 1){
+                            if(@$_SESSION['role'] == 1 ){
                              ?>
                             <th>Action</th>
                             <?php
