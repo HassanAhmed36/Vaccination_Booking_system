@@ -5,7 +5,7 @@
         $address = $_POST['h_address'];
         $password = $_POST['h_password'];
 
-        $q = "INSERT into `hospital` values(null , '$name','$address','$password')";
+        $q = "INSERT into `hospital` values(null , '$name','$address','$password',2)";
         $res = mysqli_query($con , $q);
         if ($res) {
           header("location: hospitallogin.php");
@@ -27,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Otika - Admin Dashboard Template</title>
+    <title>E-vaccination</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
@@ -54,9 +54,9 @@
                                 <form method="POST" action="">
                                     <div class="form-group mt-3 ">
                                         <input type="text" class="form-control my-4" name="h_Name" id=""
-                                            placeholder="Hospital Name" required>
+                                            placeholder="Hospital Name" pattern="[A-Za-z ]{3,50}" required>
                                         <input type="text" class="form-control my-4" name="h_address" id=""
-                                            placeholder="Hospital Address" required>
+                                            placeholder="Hospital Address" pattern="[A-Za-z1-9 ]{3,50}" required>
 
                                         <input type="password" class="form-control my-4" name="h_password" id=""
                                             placeholder="Password" required>

@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Otika - Admin Dashboard Template</title>
+    <title>E-vaccination</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css">
@@ -101,6 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="mt-2 text-muted text-center">
                     Don't have an account? <a href="Register.php">Create One</a>
+                </div>
+                <div class="mt-2 text-muted text-center">
+                    Are you a hospital? <a href="hospitallogin.php">hospital login</a>
                 </div>
             </div>
     </div>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Dashboard</title>
+  <title>E-vaccination</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="assets/css/app.min.css">
   <!-- Template CSS -->
@@ -61,26 +64,46 @@
             <li class="dropdown">
               <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View website</span></a>
             </li>
-            <li class="dropdown">
-              <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View child</span></a>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>hospitals</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="addhospital.php">Rigester hospital</a></li>
-                <li><a class="nav-link" href="listhospital.php">hospital list</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                  data-feather="briefcase"></i><span>vaccine</span></a>
-              <ul class="dropdown-menu">
-                <li><a class="nav-link" href="addvaccine.php">Vaccine hospital</a></li>
-                <li><a class="nav-link" href="listvaccine.php">Vaccine list</a></li>
-              </ul>
-            </li>
-            <li><a class="nav-link" href="booking.php">Booking details</a></li>
+            <?php
+
+            ?>
+            <?php
+            if (@$_SESSION['role'] == 1 or @$_SESSION['role'] == 3 and !@$_SESSION['h_name'] ){ 
+              # code...
+             echo' <li class="dropdown">
+                <a href="childlist.php" class="nav-link"><i data-feather="monitor"></i><span>child list</span></a>
+              </li>';
+            }
+
+            ?>
+            <?php
+            if (!@$_SESSION['role'] == 3 or @$_SESSION['role'] == 1) {
+              ?>
+             
+             <li class="dropdown">
+             <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                 data-feather="briefcase"></i><span>hospitals</span></a>
+             <ul class="dropdown-menu">
+               <li><a class="nav-link" href="addhospital.php">Rigester hospital</a></li>
+               <li><a class="nav-link" href="listhospital.php">hospital list</a></li>
+             </ul>
+           </li>
+          
+           <li class="dropdown">
+             <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                 data-feather="briefcase"></i><span>Vaccine</span></a>
+             <ul class="dropdown-menu">
+               <li><a class="nav-link" href="addvaccine.php">Add vaccine</a></li>
+               <li><a class="nav-link" href="listvaccine.php">Vaccinelist</a></li>
+             </ul>
+           </li>
+           <?php
+            }
+
+            ?>
+
+           
+            <li><a class="nav-link" href="appoiment.php">Appointment</a></li>
 
             
            
@@ -91,18 +114,15 @@
       <!-- Main Content -->
       <?php
 include 'db.php';
- $q = "SELECT * from `hospital`;";
+ $q = "select booking.b_id, child.c_name,hospital.h_name,vaccine.v_name,booking.status,booking.b_date from booking JOIN child on child.c_id = booking.child JOIN hospital on hospital.h_id = booking.hospital JOIN vaccine on vaccine.v_id = booking.vaccine;";
  $res = mysqli_query($con, $q);
  if (!$res) {
   echo "something gone wrong";
   # code...
- }else{
-
  }
- ?>
-
  
-      <div class="main-content">
+ ?>
+    <div class="main-content">
         <section class="section">
           <div class="section-body">
           <section class="section">
@@ -110,33 +130,76 @@ include 'db.php';
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Hospital List</h4>
+                    <h4>Appointment List</h4>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
                       <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
                         <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Password</th>
-                            <th>Action</th>
+                            <tr>
+                            <th>No</th>
+                            <th>Child</th>
+                            <th>Hospital</th>
+                            <th>Vaccine</th>
                             
+                             <th>Status</th>
+                            
+
+                            
+                            <th>Date</th>
+                            <?php
+                            if(@$_SESSION['role'] == 1){
+                             ?>
+                            <th>Action</th>
+                            <?php
+                            }
+                            ?>
                           </tr>
                         </thead>
                         <tbody>
-                       <?php while($row = mysqli_fetch_assoc($res)){?>
-                          <tr>
-                            <td><?= $row['h_name']?> </td>
-                            <td><?= $row['h_address']?></td>
-                            <td><?= $row['h_password']?></td>
+                            <?php while($row = mysqli_fetch_assoc($res)){?>
+                            <tr>
+                            <td><?= $row['b_id']?> </td>
+                            <td><?= $row['c_name']?></td>
+                            <td><?= $row['h_name']?></td>
+                            <td><?= $row['v_name']?></td>
+                            
+                             
+                            <td><?= $row["status"]?></td>
+                            
+                            <td><?= $row['b_date']?></td>
                             <td>
-                            <a class="btn btn-sm btn-warning mr-1" href="/vaccine/edithospital.php?id=<?= $row["h_id"] ?>"> Edit</a>
-                            <a class="btn btn-sm btn-danger" href="/vaccine/deletehospital.php?id=<?= $row["h_id"] ?>"> Delete</a>
+                              <?php
+                            if(@$_SESSION['role'] == 1){
+                             ?>
+                            <a class="btn btn-sm btn-warning mr-1" href="/vaccine/approve.php?id=<?= $row["b_id"] ?>">Approve</a>
+                            <a class="btn btn-sm btn-danger" href="/vaccine/reject.php?id=<?= $row["b_id"] ?>"> Rejcted</a>
+                            
+                              <?php
+                             }
+
+                            
+                             ?>
+                             <?php
+                            if(@$_SESSION['h_name']){
+                             ?>
+                            <a class="btn btn-sm btn-warning mr-1" href="/vaccine/complete.php?id=<?= $row["b_id"] ?>">Completed</a>
+                            
+                              <?php
+                             }
+                             
+                            
+                             ?>
+                              <?php
+                            }
+                            ?>
+
+                              
+
                             </td>
                             
                           </tr>
-                          <?php } ?>
+                          
                          
                            </tbody>
                       </table>

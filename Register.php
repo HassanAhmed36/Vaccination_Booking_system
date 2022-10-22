@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Otika - Admin Dashboard Template</title>
+    <title>E-vaccination</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <link rel="stylesheet" href="assets/bundles/jquery-selectric/selectric.css">
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <form method="POST">
                                     <div class="form-group mt-3 ">
                                         <input type="text" class="form-control my-4" name="Name" id="subject"
-                                            placeholder="Name" required>
+                                            placeholder="Name" pattern="[A-Za-z ]{3,50}" required>
                                         <input type="email" class="form-control my-4" name="password" id="subject"
                                             placeholder="Email" required>
 
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             placeholder="Password" required>
 
                                         <input type="text" class="form-control my-4" name="password" id="subject"
-                                            placeholder="Role" required>
+                                            placeholder="Role"  pattern="[2-4 ]{1,2}"  required>
                                             <div class="my-3"><button type="submit" class=" btn btn-primary ">Rigester</button></div>
 
 

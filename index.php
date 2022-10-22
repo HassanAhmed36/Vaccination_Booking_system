@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!@($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
-    header('location: login.php');
-    exit;
-}
+// if (!@($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+//     header('location: login.php');
+//     exit;
+// } 
 // $role_id = $_GET['id'];
 // 
 
@@ -65,17 +65,28 @@ if (!@($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="/vaccine/index.html">Home</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/about.html">About</a></li>
-
-
-                    <li><a class="nav-link scrollto" href="/vaccine/contact.html">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/childrigester.php">Rigester child</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/booking.php">Booking
-                            appointment</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/dashboard.php">Dashboard</a></li>
+                    <li><a class="nav-link scrollto active" href="/vaccine/index.php">Home</a></li>
+                    <li><a class="nav-link scrollto" href="/vaccine/about.php">About</a></li>
+                    <li><a class="nav-link scrollto" href="/vaccine/contact.php">Contact</a></li>
                     <?php
-          if (@$_SESSION['name']) {
+                       if(@$_SESSION['role'] == 3 or !@$_SESSION['role'] and !@$_SESSION['h_name']){
+
+                           echo 
+                           '<li><a class="nav-link scrollto" href="/vaccine/childrigester.php">Rigester child</a></li>
+                           <li><a class="nav-link scrollto" href="/vaccine/booking.php">Booking
+                                   appointment</a></li>';
+                       }  
+                       ?>
+                     
+                       <?php
+                       if(@$_SESSION['role'] or  @$_SESSION['h_name']  ){
+
+                           echo '<li><a class="nav-link scrollto" href="/vaccine/dashboard.php">Dashboard</a></li>';
+                       }  
+                       ?>   
+                            
+                    <?php
+          if (@$_SESSION['name'] || @$_SESSION['h_name'] ) {
             echo '<li><a class="getstarted scrollto" href="/vaccine/logout.php">Logout</a></li>';
            
           }else{

@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Otika - Admin Dashboard Template</title>
+    <title>E-vaccination</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <link rel="stylesheet" href="assets/bundles/bootstrap-social/bootstrap-social.css">
@@ -74,9 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <form method="POST" action="#" class="needs-validation" novalidate="">
                                     <div class="form-group mt-3 ">
                                         <input type="text" class="form-control my-4" name="h_name" id="subject"
-                                            placeholder="Email" required>
+                                            placeholder="Email" required pattern="[A-Za-z ]{3,50}" required>
                                         <input type="password" class="form-control my-4" name="h_password" id="subject"
-                                        placeholder="Password" required>
+                                        placeholder="Password" pattern="[A-Za-z1-9]{3,50}" required>
                                     </div>
 
                                    
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="mt-2 text-muted text-center">
-                    Don't have an account? <a href="hospitalRegister.php">Create One</a>
+                    Don't have an account? <a href="hospitalregister.php">Create One</a>
                 </div>
             </div>
     </div>

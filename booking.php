@@ -1,4 +1,17 @@
 <?php
+session_start();
+// if (!@($_SESSION['loggedin']) || $_SESSION['loggedin'] != true) {
+//     header('location: login.php');
+//     exit;
+// } 
+// $role_id = $_GET['id'];
+// 
+
+
+
+
+
+
       include 'db.php';
       if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -6,6 +19,8 @@
         $hospital = $_POST['hospital'];
         $vaccine = $_POST['vaccine'];
         $date = $_POST['date'];
+        if(@$_SESSION['name'] || @$_SESSION['h_name']){
+
         
 
         $q = "INSERT INTO `booking` VALUES (NULL, '$child', '$hospital', '$vaccine', 'pending' ,'$date');";
@@ -16,6 +31,10 @@
         }else {
           echo mysqli_error($con);
         }
+    }else{
+        header("location: login.php");
+          die;
+    }
 
       }
 
@@ -76,16 +95,34 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="/vaccine/index.php">Home</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/about.html">About</a></li>
+                    <li><a class="nav-link scrollto" href="/vaccine/about.php">About</a></li>
+                    <li><a class="nav-link scrollto" href="/vaccine/contact.php">Contact</a></li>
+                    <?php
+                       if(@$_SESSION['role'] == 3 or !@$_SESSION['role'] or @$_SESSION['role'] == 2){
 
+                           echo 
+                           '<li><a class="nav-link scrollto" href="/vaccine/childrigester.php">Rigester child</a></li>
+                           <li><a class="nav-link scrollto" href="/vaccine/booking.php">Booking
+                                   appointment</a></li>';
+                       }  
+                       ?>
+                    <?php
+if(@$_SESSION['role'] == 1 or @$_SESSION['h_name']  ){
+                           echo '<li><a class="nav-link scrollto" href="/vaccine/dashboard.php">Dashboard</a></li>';
+                       }  
+                       ?>
 
-                    <li><a class="nav-link scrollto" href="/vaccine/contact.html">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/childrigester.php">Rigester child</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/booking.php">Booking
-                            appointment</a></li>
-                    <li><a class="nav-link scrollto" href="/vaccine/dashboard.php">Dashboard</a></li>
-                    <li><a class="getstarted scrollto" href="/vaccine/login.php">Login</a></li>
-                    <li><a class="getstarted scrollto" href="/vaccine/Register.php">Rigester</a></li>
+                    <?php
+          if (@$_SESSION['name'] || @$_SESSION['h_name'] ) {
+            echo '<li><a class="getstarted scrollto" href="/vaccine/logout.php">Logout</a></li>';
+           
+          }else{
+            echo '<li><a class="getstarted scrollto" href="/vaccine/login.php">Login</a></li>
+            <li><a class="getstarted scrollto" href="/vaccine/Register.php">Rigester</a></li>';
+          }
+
+          
+        ?>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -194,17 +231,17 @@
                     }
                 ?>
                 <div class="form-group mt-2">
-                   
-                   
+
+
                     <label class="mb-1 mx-1">Date</label>
                     <input type="date" class="form-control" name="date" id="subject" required>
-                
+
                 </div>
                 <div class="form-group mt-3">
-                   
-                   
+
+
                     <button type="submit" class="btn btn-primary">Submit</button>
-                
+
                 </div>
             </form>
 

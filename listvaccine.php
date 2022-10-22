@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Dashboard</title>
+    <title>E-vaccination</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <!-- Template CSS -->
@@ -57,35 +57,55 @@
                         </a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li class="menu-header">Main</li>
-                        <li class="dropdown">
-                            <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View
-                                    website</span></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View
-                                    child</span></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="briefcase"></i><span>hospitals</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="addhospital.php">Rigester hospital</a></li>
-                                <li><a class="nav-link" href="listhospital.php">hospital list</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="briefcase"></i><span>Vaccine</span></a>
-                            <ul class="dropdown-menu">
-                                <li><a class="nav-link" href="addvaccine.php">Rigester vaccine</a></li>
-                                <li><a class="nav-link" href="listvaccine.php">vaccine list</a></li>
-                            </ul>
-                        </li>
+            <li class="menu-header">Main</li>
+            <li class="dropdown">
+              <a href="index.php" class="nav-link"><i data-feather="monitor"></i><span>View website</span></a>
+            </li>
+            <?php
 
-                        <li><a class="nav-link" href="booking.php">Booking details</a></li>
+            ?>
+            <?php
+            if (@$_SESSION['role'] == 1 or @$_SESSION['role'] == 3 and !@$_SESSION['h_name'] ){ 
+              # code...
+             echo' <li class="dropdown">
+                <a href="childlist.php" class="nav-link"><i data-feather="monitor"></i><span>child list</span></a>
+              </li>';
+            }
 
+            ?>
+            <?php
+            if (!@$_SESSION['role'] == 3 or @$_SESSION['role'] == 1) {
+              ?>
+             
+             <li class="dropdown">
+             <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                 data-feather="briefcase"></i><span>hospitals</span></a>
+             <ul class="dropdown-menu">
+               <li><a class="nav-link" href="addhospital.php">Rigester hospital</a></li>
+               <li><a class="nav-link" href="listhospital.php">hospital list</a></li>
+             </ul>
+           </li>
+          
+           <li class="dropdown">
+             <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                 data-feather="briefcase"></i><span>Vaccine</span></a>
+             <ul class="dropdown-menu">
+               <li><a class="nav-link" href="addvaccine.php">Add vaccine</a></li>
+               <li><a class="nav-link" href="listvaccine.php">Vaccinelist</a></li>
+             </ul>
+           </li>
+           <?php
+            }
 
+            ?>
 
-                    </ul>
+           
+            <li><a class="nav-link" href="appoiment.php">Appointment</a></li>
+
+            
+           
+            
+          </ul>
                 </aside>
             </div>
             <!-- Main Content -->
